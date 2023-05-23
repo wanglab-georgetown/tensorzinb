@@ -336,9 +336,6 @@ class TensorZINB:
                 outputs=[output],
             )
 
-            # with contextlib.redirect_stdout(open(os.devnull, "w")):
-            #     model_summary = model.summary()
-
             opt = RMSprop(learning_rate=learning_rate)
             model.compile(loss=zinb.loss, optimizer=opt)
 
@@ -391,15 +388,6 @@ class TensorZINB:
                     break
                 except Exception as e:
                     print(model.summary())
-                    print('--------------')
-                    print(num_sample)
-                    print('--------------')
-                    print(np.ones((num_sample, 1)))
-                    print('--------------')
-                    print(inputs_theta)
-                    print('--------------')
-                    print(theta)
-                    print('--------------')
                     print(e)
                     continue
 
