@@ -1,0 +1,9 @@
+keras==2.9.0
+numpy==1.22.3
+pandas>=1.5.2
+patsy>=0.5.3
+scikit_learn>=1.2.0
+scipy>=1.9.3
+statsmodels>=0.13.5
+tensorflow_macos==2.9.2; sys_platform == "darwin"
+tensorflow==2.9.2; sys_platform != "darwin"
