@@ -44,7 +44,7 @@ TensorZINB(
 ``` r
 TensorZINB.fit(
     init_weights={},          # initial model weights. If empty, init_method is used to find init weights
-    init_method="poi",        # initial method: `poi` for Poisson and `nb` for negative binomial
+    init_method="poi",        # initialization method: `poi` for Poisson and `nb` for negative binomial
     device_type="CPU",        # device_type: `CPU` or `GPU`
     device_name=None,         # None or one from `tf.config.list_logical_devices()`
     return_history=False,     # whether return loss and weights history during training
