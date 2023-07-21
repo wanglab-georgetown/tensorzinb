@@ -12,6 +12,7 @@ $$
 $$
 
 We use the following model parameterization
+
 $$
         \log \mu_g =X_{\mu}\beta_{g,\mu}+Z_{\mu}\alpha_{\mu},
         logit \pi_g =X_{\pi}\beta_{g,\pi}+Z_{\pi}\alpha_{\pi}, \log \theta_g = \beta_{g,\theta},
