@@ -1,12 +1,23 @@
 ## Zero-inflated Negative Binomial Model using TensorFlow
 
-TensorZINB is a Python module that uses TensorFlow for solving zero-inflated negative binomial (ZINB) and negative binomial (NB) models. It can precisely compute the ZINB log likelihood. It can also be used for differentially expressed gene (DEG) analysis for single-cell RNA sequencing (scRNA-seq) as well. The package is numerically stable, can run datasets in batches, and its computing speed is superior over other existing ZINB solvers. The analysis results from TensorZINB have been thoroughly tested against existing statistical packages to ensure that they are correct. TensorZINB supports running different features on the negative binomial part and the zero-inflated (logit) part, while common features with the same weight across all subjects can also be used in a batch.
+TensorZINB is a Python module that uses TensorFlow to effectively solve negative binomial (NB) and zero-inflated negative binomial (ZINB) models. One of its key strengths is its ability to accurately calculate the NB/ZINB log likelihood. Additionally, it can be used for differentially expressed gene (DEG) analysis in the context of single-cell RNA sequencing (scRNA-seq). This package distinguishes itself by ensuring numerical stability, enabling the processing of datasets in batches, and delivering superior computing speeds compared to other existing NB/ZINB solvers. To guarantee the reliability of its analysis results, TensorZINB has undergone rigorous testing against various statistical packages. TensorZINB supports the execution of various features on both the negative binomial and zero-inflated (logit) components. Furthermore, it allows for the use of common features with the same weights across multiple subjects within a batch.
+
 
 The negative binomial distribution is
 $$NB(y;\mu,\theta)=\frac{\Gamma(y+\theta)}{\Gamma(\theta)\Gamma(y+1)}\left( \frac{\theta}{\theta+\mu}\right)^\theta\left(\frac{\mu}{\theta+\mu}\right)^y$$
 where $\mu$ is the mean and $\theta$ is the dispersion parameter. For zero-inflated models, the counts are modelled as a mixture of the Bernoulli distribution and count distribution, i.e.,
-$$Pr(Y=0)=\pi+(1-\pi)NB(0),Pr(Y=y)=(1-\pi)NB(y),\,y>0.$$
+$$
+        Pr(Y=0)=\pi+(1-\pi)NB(0),\\
+        Pr(Y=y)=(1-\pi)NB(y),\,y>0.
+$$
 
+We use the following model parameterization
+$$
+        \log \mu_g =X_{\mu}\beta_{g,\mu}+Z_{\mu}\alpha_{\mu},
+        logit \pi_g =X_{\pi}\beta_{g,\pi}+Z_{\pi}\alpha_{\pi}, \log \theta_g = \beta_{g,\theta},
+$$
+
+where $\mu_g$ is the mean of subject $g$, $X_{\mu}$, $Z_{\mu}$, $X_{\pi}$ and $Z_{\pi}$ are feature matrices, $\beta_{g,\mu}$ and $\beta_{g,\pi}$ are coefficients for each subject $g$, $\alpha_{\mu}$ and $\alpha_{\pi}$ are common coefficients shared across all subjects.
 
 
 ## Installation
@@ -19,11 +30,11 @@ or
 
 `pip install .`
 
-For Apple silicon (M1, M2 and etc), it is recommended to install TensorFlow by following the command in Troubleshooting section below.
+For Apple silicon (M1, M2 and etc), it is recommended to install TensorFlow by following the command in Troubleshooting Section below.
 
 ## Model Estimation
 
-`TensorZINB` solves the zero-inflated negative binomial (ZINB) and negative binomial (NB) models with given read counts. 
+`TensorZINB` solves the negative binomial (NB) and zero-inflated negative binomial (ZINB) models with given read counts. 
 
 ### Model initialization
 
@@ -111,17 +122,17 @@ LRTest.run(
 The `LRTest.run` returns a result dataframe `dfr` with columns:
 ``` r
 [
-	"ll0":                   # log likelihood without conditions
-	"aic0":                  # AIC without conditions
-	"df0":                   # degree of freedom without conditions
-	"cpu_time0":             # computing time for each subject without conditions
-	"ll1":                   # log likelihood without conditions
-	"aic1":                  # AIC with conditions
-	"df1":                   # degree of freedom with conditions
-	"cpu_time1":             # computing time for each subject with conditions
-	"lld":                   # ll1 - ll0
-	"aicd":                  # aic1 - aic0
-	"pvalue":                # p-value: 1 - stats.chi2.cdf(2 * lld, df1 - df0)
+    "ll0":                   # log likelihood without conditions
+    "aic0":                  # AIC without conditions
+    "df0":                   # degree of freedom without conditions
+    "cpu_time0":             # computing time for each subject without conditions
+    "ll1":                   # log likelihood without conditions
+    "aic1":                  # AIC with conditions
+    "df1":                   # degree of freedom with conditions
+    "cpu_time1":             # computing time for each subject with conditions
+    "lld":                   # ll1 - ll0
+    "aicd":                  # aic1 - aic0
+    "pvalue":                # p-value: 1 - stats.chi2.cdf(2 * lld, df1 - df0)
 ]      
 ```
 
@@ -135,7 +146,7 @@ We can further correct pvalues for multiple testing by calling `correct_pvalues_
  
 ## Example
 
-An example code to show how to use `TensorZINB` and `LRTest` to perform DEG analysis can be found at `examples/deg_example.ipynb`. The example runs DEG analysis on a sample dataset with 17 clusters and 20 genes in each cluster. 
+An example code to show how to use `TensorZINB` and `LRTest` to perform DEG analysis can be found at [`examples/deg_example.ipynb`](examples/deg_example.ipynb). The example runs DEG analysis on a sample dataset with 17 clusters and 20 genes in each cluster. 
 
 
 ## Tests
@@ -145,6 +156,8 @@ In `tests/tensorzinb.ipynb`, we show several tests:
 - validate the Poisson weights initialization.
 - compare with `statsmodels` for negative binomial model only without zero-inflation to make sure the results match.
 - show `statsmodels` is not numerically stable for zero-inflated negative binomial. `statsmodels` can only return results when initialized with TensorZINB results. TensorZINB results match the true parameters used to generate the samples.
+
+More tests can be found in https://github.com/wanglab-georgetown/countmodels/blob/main/tests/zinb_test.ipynb
 
 
 ## Troubleshooting
@@ -159,7 +172,7 @@ To run tensorflow on Apple silicon (M1, M2, etc), install TensorFlow using the f
 
 
 ## References
-Cui, T., Wang, T. A Comprehensive Assessment of Hurdle and Zero-inflated Models for Single Cell RNA-sequencing Analysis (2023).
+Cui, T., Wang, T. A Comprehensive Assessment of Hurdle and Zero-inflated Models for Single Cell RNA-sequencing Analysis, Briefings in Bioinformatics, 2023.
 
 ## Support and Contribution
-For technical issues particular to this repo, please report the issue on this GitHub repository.
+If you encounter any bugs while using the code, please don't hesitate to create an issue on GitHub here.
