@@ -164,6 +164,7 @@ More tests can be found in https://github.com/wanglab-georgetown/countmodels/blo
 
 ## Troubleshooting
 
+### Run on Apple silicon
 To run tensorflow on Apple silicon (M1, M2, etc), install TensorFlow using the following:
 
 `conda install -c apple tensorflow-deps`
@@ -171,6 +172,10 @@ To run tensorflow on Apple silicon (M1, M2, etc), install TensorFlow using the f
 `python -m pip install tensorflow-macos==2.9.2`
 
 `python -m pip install tensorflow-metal==0.5.1`
+
+### Feature normalization
+
+If the solver cannot return correct results, please ensure features in $X$ are normalized by using `StandardScaler()`. Please refer to the example in [`examples/deg_example.ipynb`](examples/deg_example.ipynb).
 
 
 ## References
