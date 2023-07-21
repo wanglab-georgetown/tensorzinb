@@ -6,6 +6,7 @@ TensorZINB is a Python module that uses TensorFlow to effectively solve negative
 The negative binomial distribution is
 $$NB(y;\mu,\theta)=\frac{\Gamma(y+\theta)}{\Gamma(\theta)\Gamma(y+1)}\left( \frac{\theta}{\theta+\mu}\right)^\theta\left(\frac{\mu}{\theta+\mu}\right)^y$$
 where $\mu$ is the mean and $\theta$ is the dispersion parameter. For zero-inflated models, the counts are modelled as a mixture of the Bernoulli distribution and count distribution, i.e.,
+
 $$
         Pr(Y=0)=\pi+(1-\pi)NB(0),\\
         Pr(Y=y)=(1-\pi)NB(y),\,y>0.
