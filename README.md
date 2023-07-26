@@ -9,7 +9,7 @@ where $\mu$ is the mean and $\theta$ is the dispersion parameter. For zero-infla
 
 $$
         Pr(Y=0)=\pi+(1-\pi)NB(0),\\
-        Pr(Y=y)=(1-\pi)NB(y),\,y>0.
+        Pr(Y=y)=(1-\pi)NB(y),y>0.
 $$
 
 We use the following model parameterization
