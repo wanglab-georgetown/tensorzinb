@@ -178,8 +178,8 @@ To run tensorflow on Apple silicon (M1, M2, etc), install TensorFlow using the f
 If the solver cannot return correct results, please ensure features in $X$ are normalized by using `StandardScaler()`. Please refer to the example in [`examples/deg_example.ipynb`](examples/deg_example.ipynb).
 
 
-## References
-Cui, T., Wang, T. A Comprehensive Assessment of Hurdle and Zero-inflated Models for Single Cell RNA-sequencing Analysis, Briefings in Bioinformatics, 2023.
+## Reference
+Cui, T., Wang, T. [A Comprehensive Assessment of Hurdle and Zero-inflated Models for Single Cell RNA-sequencing Analysis](https://doi.org/10.1093/bib/bbad272), Briefings in Bioinformatics, July 2023. https://doi.org/10.1093/bib/bbad272
 
 ## Support and Contribution
 If you encounter any bugs while using the code, please don't hesitate to create an issue on GitHub here.
