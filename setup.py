@@ -24,7 +24,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'keras==2.9.0',
-        'numpy==1.23.5',
+        'numpy>1.23.5',
         'pandas',
         'patsy',
         'scikit_learn',
